@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# electron-vite compiled output
+out/
+
+# electron-builder installers/artifacts
+dist/
+*.exe
+*.dmg
+*.AppImage
+*.snap
+*.blockmap
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Secrets & signing material
+.env
+.env.*
+*.pem
+*.p12
+
+# Logs & OS/editor cruft
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code project config
+.claude/

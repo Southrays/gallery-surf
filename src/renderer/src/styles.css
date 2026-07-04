@@ -1,0 +1,194 @@
+:root {
+  --bg: #0f1115;
+  --panel: #191c22;
+  --card: #22262e;
+  --border: #2e323b;
+  --border-hover: #3a3f4a;
+  --text: #f4f5f7;
+  --muted: #9ba1ac;
+  --muted-dim: #656b76;
+  --accent: #e8a33d;
+  --accent-ink: #0f1115;
+  --reject: #e5484d;
+  --success: #46a758;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  height: 100%;
+}
+
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+#root {
+  height: 100vh;
+  width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+input::placeholder {
+  color: var(--muted-dim);
+}
+
+button {
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+@keyframes kfade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes kpop {
+  from {
+    opacity: 0;
+    transform: scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.app-shell {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* height is set inline by TitleBar.tsx from the real native overlay rect;
+   36px here is just the fallback before that measurement is available (kept
+   in sync with titleBarOverlay.height in src/main/index.ts to avoid a flash
+   of the wrong size). `background` must match titleBarOverlay.color there
+   exactly (#191C22) or the native button strip visibly seams against it. */
+.titlebar {
+  flex: none;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-left: 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+}
+
+.app-root {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hover-row:hover {
+  background: #1e222a;
+}
+.hover-card:hover {
+  border-color: var(--accent);
+  background: #1b1f26;
+}
+.hover-btn-ghost:hover {
+  background: #2b303a;
+  border-color: var(--border-hover);
+}
+.hover-link:hover {
+  color: var(--text);
+}
+.hover-accent:hover {
+  color: var(--accent);
+}
+.hover-brighten:hover {
+  filter: brightness(1.07);
+}
+.hover-tile:hover {
+  background: #22262e;
+  color: var(--text);
+}
+.hover-select:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.hover-reject:hover {
+  background: var(--reject);
+  color: #fff;
+}
+.hover-neutral:hover {
+  background: var(--border);
+  color: var(--text);
+}
+.hover-danger-circle:hover {
+  background: var(--reject);
+  color: #fff;
+}
+.hover-overlay-show {
+  opacity: 0;
+  transition: opacity 0.14s;
+}
+.hover-overlay-show:hover,
+.hover-overlay-parent:hover .hover-overlay-show {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.thumb-shimmer {
+  background: linear-gradient(100deg, #22262e 40%, #2a2f38 50%, #22262e 60%);
+  background-size: 300% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}

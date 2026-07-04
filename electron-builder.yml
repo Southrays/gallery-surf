@@ -1,0 +1,49 @@
+appId: com.gallerysurf.app
+productName: Gallery Surf
+
+directories:
+  output: dist
+  buildResources: build
+
+# Negation-only: electron-builder's default file set (**/* minus its own
+# built-in ignores) stays active, so production node_modules — including
+# sharp's native binaries — are included automatically. These entries just
+# additionally strip source/dev-only files that don't belong in the package.
+files:
+  - '!src/**'
+  - '!electron.vite.config.*'
+  - '!tsconfig*.json'
+  - '!tsconfig*.tsbuildinfo'
+  - '!*.md'
+  - '!.gitignore'
+  - '!.editorconfig'
+  - '!.vscode/**'
+
+# sharp ships a platform-specific native (.node) addon — asar archives can't
+# load native addons from inside them, so both sharp's own JS/glue and the
+# @img/* prebuilt-binary packages it depends on must be unpacked to
+# app.asar.unpacked instead, or the packaged app crashes on first use.
+asarUnpack:
+  - '**/node_modules/sharp/**'
+  - '**/node_modules/@img/**'
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  installerHeader: build/installerHeader.bmp
+  installerSidebar: build/installerSidebar.bmp
+  uninstallerSidebar: build/installerSidebar.bmp
+  uninstallDisplayName: Gallery Surf
+
+mac:
+  target:
+    - target: dmg
+  category: public.app-category.photography
